@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>野狗 - 实时视频 - 登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <!-- build:css(./app) /styles/app.css -->
+    <link rel="stylesheet" type="text/css" href="/styles/index.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <script type="text/javascript">
+    function myBrowser() {
+        var userAgent = navigator.userAgent;
+        var isOpera = userAgent.indexOf("Opera") > -1;
+        if ((!!window.opr && !!opr.addons) ||
+            !!window.opera ||
+            navigator.userAgent.indexOf(' OPR/') >= 0) {
+            return "Opera"
+        }; //判断是否Opera浏览器
+        if (navigator.mozGetUserMedia) {
+            return "Firefox";
+        } //判断是否Firefox浏览器
+        if (navigator.webkitGetUserMedia && window.webkitRTCPeerConnection) {
+            return "Chrome";
+        }
+        if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+            return "Safari";
+        } //判断是否Safari浏览器
+        if ( /*@cc_on!@*/ false || !!document.documentMode) {
+            return "IE";
+        }; //判断是否IE浏览器
+        if (navigator.mediaDevices && navigator.userAgent.match(/Edge\/(\d+).(\d+)$/)) {
+            return "Edge";
+        }
+    }
+    var mb = myBrowser();
+    console.log(mb);
+    if (mb === 'Edge' || mb === 'IE') {
+        window.location.href = '/browser-guide.html';
+    }
+    </script>
+    <div class="top-decorate">
+        <a href='https://github.com/WildDogTeam/lib-js-wildRTC' class="github-lib">Fork me on Github</a>
+    </div>
+    <div class="wilddog-logo text-center"><img src="/images/wilddog-logo.svg" width="46" height="46" alt=""></div>
+    <div class="meeting-entry">
+        <div class="entry-title">WildRTC <img src="/images/alpha.svg" width="40" height="20" alt="" class="alpha"></div>
+        <div class="entry-tips">创建或进入一个视频会议</div>
+        <div class="room-name">
+            <div class="room-name-tips">房间名：</div>
+            <input type="text" id='room-name' value=''>
+            <span class="err-msg">请输入房间名</span>
+            <button class="gold-btn enter-btn" id="joinBtn">进入</button>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="contact-title text-center">联系我们</div>
+        <div class="contact-content">
+            <div class="sa clearfix">
+                <span class="sa-icon"><img src="/images/service.svg" width="20" height="18" alt=""></span>
+                <a href="https://wilddog.daikeapp.com/tickets" target='_blank' class="contact-text service-link">客服工单</a>
+            </div>
+            <div class="contact-us clearfix">
+                <span class="sa-icon"><img src="/images/qq-logo.svg" width="20" height="18" alt=""></span>
+                <span class="contact-text">官方QQ交流群:133549371</span>
+            </div>
+        </div>
+    </div>
+    <!-- build:js(./app) /scripts/entry.js -->
+    <script src="scripts/entry-ui.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "webrtc",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "itolfh <panjiaming@wilddog.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "clipboard": "^1.5.10"
+  }
+}

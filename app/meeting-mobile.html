@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>Document</title>
+    <!-- build:css(./app) /styles/app.css -->
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <script type="text/javascript">
+    var isSupport = function() {
+        var userAgentInfo = navigator.userAgent;
+        var isAndroid = false;
+        if (userAgentInfo.indexOf('Android') > 0) {
+            isAndroid = true;
+        }
+
+        function myBrowser() {
+            if ((!!window.opr && !!opr.addons) ||
+                !!window.opera ||
+                navigator.userAgent.indexOf(' OPR/') >= 0) {
+                return "Opera"
+            }; //判断是否Opera浏览器
+            if (navigator.mozGetUserMedia) {
+                return "Firefox";
+            } //判断是否Firefox浏览器
+            if (navigator.webkitGetUserMedia && window.webkitRTCPeerConnection) {
+                return "Chrome";
+            }
+        }
+        var mb = myBrowser();
+        if (!(mb === 'Chrome' || mb === 'Firefox') || !isAndroid) {
+            alert('wildrtc暂不支持iOS，请使用其它方式！');
+            window.location.href = '/';
+        }
+    }();
+    </script>
+    <div class="header text-center">
+        <span class="room-title-content"><span class="room-title"><span id="roomid"></span>视频会议</span>
+        </span>
+    </div>
+    <div class="bigger-screen">
+        <video autobuffer autoplay muted class='video-full' id='fullscreen'></video>
+    </div>
+    <div class="video-bottom">
+        <span class="shadow shadow-left"><img src="/images/shadow.png" width="74" class="shadow-img" alt=""></span>
+        <span class="arr arr-left"><img src="/images/arr-left.png" width="16" height="24" alt=""></span>
+        <div class="video-list-content">
+            <ul class="video-list clearfix">
+                <li class="video-item video-item-current text-center">
+                    <div class="video-content">
+                        <!-- <img src="/images/mute.svg" alt="" width="24" height="22" class="mute"> -->
+                        <div class="video-bg-image">
+                            <img src="/images/camera-off.svg" class="camera-icon" width="100" height="108" alt="">
+                        </div>
+                        <video autoplay="true" class="video" id="localStream" width="100%" height="100%"></video>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <span class="arr arr-right"><img src="/images/arr-right.png" width="16" height="24" alt=""></span>
+        <span class="shadow shadow-right"><img src="/images/shadow-right.png" width="74" class="shadow-img" alt=""></span>
+    </div>
+    <div class="video-ctrl-m">
+        <div class="ctrl-content">
+            <div class="ctrls">
+                <div class="ctrl text-center">
+                    <span class="voice-ctrl text-center ctrl-on">
+                        <img src="/images/voice-off.svg" width="28" height="36" alt="" class="ctrl-icon-on">
+                        <img src="/images/voice-white.svg" width="28" height="36" alt="" class="ctrl-icon-off">
+                        <span class="ctrl-text">麦克风</span>
+                    </span>
+                </div>
+                <div class="ctrl text-center">
+                    <span class="camera-ctrl text-center ctrl-on">
+                        <img src="/images/camera-white.svg" width="28" height="36" alt="" class="ctrl-icon-on">
+                        <img src="/images/camera-gray.svg" width="28" height="36" alt="" class="ctrl-icon-off">
+                        <span class="ctrl-text">摄像头</span>
+                    </span>
+                </div>
+                <div class="ctrl text-center">
+                    <span class="mute-ctrl text-center ctrl-on">
+                        <img src="/images/mute-off.svg" width="28" height="36" alt="" class="ctrl-icon-on">
+                        <img src="/images/mute.svg" width="28" height="36" alt="" class="ctrl-icon-off">
+                        <span class="ctrl-text">声音</span>
+                    </span>
+                </div>
+                <div class="ctrl text-center">
+                    <span class="full-screen-ctrl exit text-center ctrl-on">
+                        <img src="/images/exit-m.svg" width="28" height="36" alt="" class="ctrl-icon-on">
+                        <img src="/images/exit-m.svg" width="28" height="36" alt="" class="ctrl-icon-off">
+                        <span class="ctrl-text">退出</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+    <script src="https://cdn.wilddog.com/wildrtc/sdk/web/current/wildrtc.js"></script>
+    <!-- build:js(./app) /scripts/app.js -->
+    <script src="scripts/index-ui.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>

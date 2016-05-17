@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>野狗 - 实时视频</title>
+    <!-- build:css(./app) /styles/app.css -->
+    <link rel="stylesheet" type="text/css" href="/styles/index.css">
+    <!-- endbuild -->
+</head>
+
+<body>
+    <script type="text/javascript">
+    function myBrowser() {
+        var userAgent = navigator.userAgent;
+        var isOpera = userAgent.indexOf("Opera") > -1;
+        if ((!!window.opr && !!opr.addons) ||
+            !!window.opera ||
+            navigator.userAgent.indexOf(' OPR/') >= 0) {
+            return "Opera"
+        }; //判断是否Opera浏览器
+        if (navigator.mozGetUserMedia) {
+            return "Firefox";
+        } //判断是否Firefox浏览器
+        if (navigator.webkitGetUserMedia && window.webkitRTCPeerConnection) {
+            return "Chrome";
+        }
+        if (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+            return "Safari";
+        } //判断是否Safari浏览器
+        if ( /*@cc_on!@*/ false || !!document.documentMode) {
+            return "IE";
+        }; //判断是否IE浏览器
+        if (navigator.mediaDevices && navigator.userAgent.match(/Edge\/(\d+).(\d+)$/)) {
+            return "Edge";
+        }
+    }
+    var mb = myBrowser();
+    console.log(mb);
+    if (mb === 'Edge' || mb === 'IE') {
+            window.location.href = '/browser-guide.html';
+    }
+    </script>
+    <div class="content">
+        <div class="header">
+            <img src="/images/wilddog-header-logo.svg" width="143" height="36" alt="">
+            <span class="exit pull-right">
+                <img src="/images/exit.svg" class="exit-icon" width="14" height="14" alt="">
+                <img src="/images/exit-white.svg" class="exit-white-icon" width="14" height="14" alt="">
+                退出房间
+            </span>
+        </div>
+        <div class="copy-link">
+            <span class="copy-link-tips">分享链接给好友，邀请他们参加视频会议</span>
+            <div class="copy-link-show">
+                <input type="text" name="" class="meeting-url" id='meeting-url' readonly value="https://www.wilddog.com">
+                <button class="gold-btn copy-btn pull-right" data-clipboard-target="#meeting-url">复制</button>
+            </div>
+        </div>
+        <ul class="video-list clearfix video-list-single">
+            <li class="video-item text-center">
+                <div class="video-content">
+                    <!-- <img src="/images/mute.svg" alt="" width="24" height="22" class="mute"> -->
+                    <div class="video-bg-image">
+                        <img src="/images/camera-off.svg" class="camera-icon" width="100" height="108" alt="">
+                        <p class='camera-tips'>未开启摄像头</p>
+                    </div>
+                    <video autoplay="true" class="video" id="localStream" width="100%" height="100%"></video>
+                    <div class="video-ctrl">
+                        <img src="/images/camera.svg" alt="" class="camera-ctrl camera-on">
+                        <img src="/images/camera-off.svg" alt="" class="camera-ctrl camera-off">
+                        <img src="/images/voice.svg" alt="" class="voice-ctrl voice-on">
+                        <img src="/images/voice-off.svg" alt="" class="voice-ctrl voice-off">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="contact">
+        <div class="contact-title text-center">联系我们</div>
+        <div class="contact-content">
+            <div class="sa clearfix">
+                <span class="sa-icon"><img src="/images/service.svg" width="20" height="18" alt=""></span>
+                <a href="https://wilddog.daikeapp.com/tickets" target='_blank' class="contact-text service-link">客服工单</a>
+            </div>
+            <div class="contact-us clearfix">
+                <span class="sa-icon"><img src="/images/qq-logo.svg" width="20" height="18" alt=""></span>
+                <span class="contact-text">官方QQ交流群:133549371</span>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+    <script src="https://cdn.wilddog.com/wildrtc/sdk/web/current/wildrtc.js"></script>
+    <!-- build:js(./) /scripts/clipboard.js -->
+    <script src="/bower_components/clipboard/dist/clipboard.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:js(./app) /scripts/app.js -->
+    <script src="scripts/index-ui.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>
