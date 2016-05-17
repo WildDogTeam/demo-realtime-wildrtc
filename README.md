@@ -5,6 +5,7 @@
 运行环境要求：安装 nodejs 4 以上版本，安装 bower。
 
 运行 
+
 	npm install
 	bower install
 	gulp build
