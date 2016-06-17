@@ -361,69 +361,69 @@ if (isPc) {
  * 匿名登录，并建立wildrtc
  * */
 ref.authAnonymously(function(err) {
-    if (err == null) {
-        ref.onAuth(function(auth) {
-            if (auth != null) {
-                rtc = new WildRTC(ref);
-                rtc.join(function(err) {
-                    if (err == null) {
-                        remoteList.push(ref.getAuth().uid);
-                        rtc.getLocalStream(constraints, function(wildStream) {
-                            localAudioTracks = wildStream.getStream().getAudioTracks();
-                            localVideoTracks = wildStream.getStream().getVideoTracks();
-                            var localElement = document.getElementById('localStream');
-                            wildStream.bindToDOM(localElement);
-                            if (/macintosh|mac os x/i.test(navigator.userAgent)) {
-                                document.getElementById('localStream').style.width = '100%';
-                                document.getElementById('localStream').style.height = '100%';
-                            }
-                            item.getElementsByClassName('video')[0].muted = true;
-                            if (!isPc) {
-                                var fullscreenElement = document.getElementById('fullscreen');
-                                wildStream.bindToDOM(fullscreenElement);
-                            }
+    if (err != null)
+        return;
+    ref.onAuth(function(auth) {
+        if (auth == null)
+            return;
+        rtc = new WildRTC(ref);
+        rtc.join(function(err) {
+            if (err != null)
+                return;
+            remoteList.push(ref.getAuth().uid);
+            rtc.getLocalStream(constraints, function(wildStream) {
+                localAudioTracks = wildStream.getStream().getAudioTracks();
+                localVideoTracks = wildStream.getStream().getVideoTracks();
+                var localElement = document.getElementById('localStream');
+                wildStream.bindToDOM(localElement);
+                if (/macintosh|mac os x/i.test(navigator.userAgent)) {
+                    document.getElementById('localStream').style.width = '100%';
+                    document.getElementById('localStream').style.height = '100%';
+                }
+                item.getElementsByClassName('video')[0].muted = true;
+                if (!isPc) {
+                    var fullscreenElement = document.getElementById('fullscreen');
+                    wildStream.bindToDOM(fullscreenElement);
+                }
 
-                            localStream = wildStream;
-                            rtc.addStream(wildStream);
-                            var uid = ref.getAuth().uid;
-                            ref.child('isVideo/' + uid).set(true);
-                            ref.child('isVideo/' + uid).onDisconnect().remove();
-                        }, function(err) {
-                            console.error(err);
-                        });
-                    }
-                });
+                localStream = wildStream;
+                rtc.addStream(wildStream);
+                var uid = ref.getAuth().uid;
+                ref.child('isVideo/' + uid).set(true);
+                ref.child('isVideo/' + uid).onDisconnect().remove();
+            }, function(err) {
+                console.error(err);
+            });
+        });
 
-                //监听远端音视频流连接事件
-                rtc.on('stream_added', function(wildStream) {
-                    remoteList.push(wildStream.getId());
-                    insertItem(wildStream);
-                    var remoteId = wildStream.getId();
-                });
+        //监听远端音视频流连接事件
+        rtc.on('stream_added', function(wildStream) {
+            remoteList.push(wildStream.getId());
+            insertItem(wildStream);
+            var remoteId = wildStream.getId();
+        });
 
-                //监听远端音视频流断开事件
-                rtc.on('stream_removed', function(wildStream) {
-                    var remoteId = wildStream.getId();
-                    var removeIndex = remoteList.indexOf(remoteId);
-                    if (removeIndex >= 0) {
-                        remoteList.splice(removeIndex, 1);
-                        removeItem(removeIndex);
-                    }
-                    ref.child('isVideo/' + remoteId).off('value');
-                    ref.child('isVideo/' + remoteId).set(null);
-                })
-                ref.child('isVideo/').on('child_changed', function(snap) {
-                    var uid = snap.key();
-                    var removeIndex = remoteList.indexOf(uid);
-                    if (snap.val() === false) {
-                        list.children[removeIndex].querySelector('.video').style.display = 'none';
-                    } else if (snap.val() === true) {
-                        list.children[removeIndex].querySelector('.video').style.display = 'inline-block';
-                    }
-                })
+        //监听远端音视频流断开事件
+        rtc.on('stream_removed', function(wildStream) {
+            var remoteId = wildStream.getId();
+            var removeIndex = remoteList.indexOf(remoteId);
+            if (removeIndex >= 0) {
+                remoteList.splice(removeIndex, 1);
+                removeItem(removeIndex);
+            }
+            ref.child('isVideo/' + remoteId).off('value');
+            ref.child('isVideo/' + remoteId).set(null);
+        })
+        ref.child('isVideo/').on('child_changed', function(snap) {
+            var uid = snap.key();
+            var removeIndex = remoteList.indexOf(uid);
+            if (snap.val() === false) {
+                list.children[removeIndex].querySelector('.video').style.display = 'none';
+            } else if (snap.val() === true) {
+                list.children[removeIndex].querySelector('.video').style.display = 'inline-block';
             }
         })
-    }
+    })
 });
 
 var exit = document.querySelector('.exit');
