@@ -31,7 +31,7 @@ gulp.task('serve', ['watch'], function() {
         '/node_modules': 'node_modules'
       }
     },
-    https: false
+    https: true
   });
 });
 

@@ -1613,7 +1613,7 @@
       var l = e("events"),
         f = function(e, t) {
           var n = this;
-          this.wdService = t, this.ws = new WebSocket("wss://mgw.wilddog.com/ws"), this.ws.onopen = function() {
+          this.wdService = t, this.ws = new WebSocket("ws://10.18.8.14:8028/ws"), this.ws.onopen = function() {
             n.regist(), n.isOpened = !0;
             for (var e in n.buffer) n.ws.send(JSON.stringify(n.buffer[e])), delete n.buffer[e]
           }, this.ws.onmessage = function(e) {
@@ -3394,22 +3394,22 @@
         }
         if (n = this._events[e], p(n)) return !1;
         if (l(n)) switch (arguments.length) {
-          case 1:
-            n.call(this);
-            break;
-          case 2:
-            n.call(this, arguments[1]);
-            break;
-          case 3:
-            n.call(this, arguments[1], arguments[2]);
-            break;
-          default:
+            case 1:
+              n.call(this);
+              break;
+            case 2:
+              n.call(this, arguments[1]);
+              break;
+            case 3:
+              n.call(this, arguments[1], arguments[2]);
+              break;
+            default:
+              for (i = arguments.length, r = new Array(i - 1), o = 1; o < i; o++) r[o - 1] = arguments[o];
+              n.apply(this, r)
+          } else if (h(n)) {
             for (i = arguments.length, r = new Array(i - 1), o = 1; o < i; o++) r[o - 1] = arguments[o];
-            n.apply(this, r)
-        } else if (h(n)) {
-          for (i = arguments.length, r = new Array(i - 1), o = 1; o < i; o++) r[o - 1] = arguments[o];
-          for (s = n.slice(), i = s.length, o = 0; o < i; o++) s[o].apply(this, r)
-        }
+            for (s = n.slice(), i = s.length, o = 0; o < i; o++) s[o].apply(this, r)
+          }
         return !0
       }, u.prototype.addListener = function(e, t) {
         var n;

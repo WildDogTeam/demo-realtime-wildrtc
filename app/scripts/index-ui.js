@@ -346,8 +346,8 @@ if (isPc) {
  * 匿名登录，并建立wildrtc
  * */
 var config = {
-  authDomain: 'wildvideo.wilddog.com',
-  syncURL: 'https://wildvideo.wilddogio.com'
+  authDomain: 'wildrtc.wilddog.com',
+  syncURL: 'https://wildrtc.wilddogio.com'
 }
 wilddog.initializeApp(config);
 var ref = wilddog.sync();

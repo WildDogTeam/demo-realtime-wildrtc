@@ -1,0 +1,65 @@
+{
+  "name": "gulp-match",
+  "description": "Does a vinyl file match a condition?",
+  "version": "1.0.3",
+  "homepage": "https://github.com/robrich/gulp-match",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/robrich/gulp-match.git"
+  },
+  "author": {
+    "name": "Rob Richardson",
+    "url": "http://robrich.org/"
+  },
+  "main": "./index.js",
+  "keywords": [
+    "gulpfriendly",
+    "conditional",
+    "if",
+    "minimatch"
+  ],
+  "dependencies": {
+    "minimatch": "^3.0.3"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4",
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
+  },
+  "scripts": {
+    "test": "mocha && jshint ."
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "license": "MIT",
+  "gitHead": "45f5f58034da8fe922add183f6726b0f9c2921a1",
+  "bugs": {
+    "url": "https://github.com/robrich/gulp-match/issues"
+  },
+  "_id": "gulp-match@1.0.3",
+  "_shasum": "91c7c0d7f29becd6606d57d80a7f8776a87aba8e",
+  "_from": "gulp-match@>=1.0.3 <2.0.0",
+  "_npmVersion": "3.10.8",
+  "_nodeVersion": "6.9.1",
+  "_npmUser": {
+    "name": "robrich",
+    "email": "robrich@robrich.org"
+  },
+  "maintainers": [
+    {
+      "name": "robrich",
+      "email": "robrich@robrich.org"
+    }
+  ],
+  "dist": {
+    "shasum": "91c7c0d7f29becd6606d57d80a7f8776a87aba8e",
+    "tarball": "https://registry.npmjs.org/gulp-match/-/gulp-match-1.0.3.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/gulp-match-1.0.3.tgz_1478374858158_0.5844007760751992"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/gulp-match/-/gulp-match-1.0.3.tgz"
+}
