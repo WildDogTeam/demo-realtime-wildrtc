@@ -26,6 +26,7 @@
     "stream-series": "^0.1.1"
   },
   "dependencies": {
+    "gulp-connect": "^5.0.0",
     "gulp-watch": "^4.3.5",
     "wildrtc": "^0.1.3"
   }
